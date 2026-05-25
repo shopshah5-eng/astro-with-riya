@@ -16,6 +16,7 @@ import {
   Loader2
 } from "lucide-react"
 import { useState } from "react"
+import Script from "next/script" // IMPORTING NEXT.JS SCRIPT COMPONENT
 
 const INSTAGRAM_LINK = "https://www.instagram.com/astrowithriya/"
 
@@ -26,15 +27,6 @@ const services = [
   { title: "Vastu Consultation", desc: "Bring positive energy into your space", icon: <House size={28} strokeWidth={1.5} /> },
   { title: "Career Guidance", desc: "Find the right path for your success", icon: <Briefcase size={28} strokeWidth={1.5} /> },
   { title: "Numerology", desc: "Discover the power of numbers", icon: <Hash size={28} strokeWidth={1.5} /> },
-]
-
-const reels = [
-  { topText: "CHANGE YOUR", bottomText: "NAME", views: "18.2K", highlight: "text-red-500" },
-  { topText: "Pooja Room", bottomText: "Mistakes", views: "22.1K", highlight: "text-red-500" },
-  { topText: "Signs of", bottomText: "Evil Eye", views: "31.4K", highlight: "text-white" },
-  { topText: "Zodiac Signs", bottomText: "Anger Issues", views: "16.7K", highlight: "text-yellow-500" },
-  { topText: "When will", bottomText: "Money Come?", views: "27.3K", highlight: "text-yellow-500" },
-  { topText: "Never Keep These", bottomText: "Things at Home", views: "19.8K", highlight: "text-red-500" },
 ]
 
 const testimonials = [
@@ -82,6 +74,9 @@ export default function HomePage() {
   return (
     <main className="bg-[#050505] text-white overflow-x-hidden font-sans relative">
       
+      {/* BEHOLD.SO SCRIPT LOADED SAFELY */}
+      <Script type="module" src="https://w.behold.so/widget.js" strategy="afterInteractive" />
+
       {/* --- HERO SECTION --- */}
       <section className="relative min-h-[100svh] flex flex-col bg-[#050505]">
         
@@ -270,7 +265,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* REELS SECTION */}
+      {/* REELS SECTION - POWERED BY BEHOLD.SO WIDGET */}
       <section id="reels" className="px-6 lg:px-16 py-10 lg:py-16 max-w-[1400px] mx-auto relative z-20 bg-[#050505]">
         <div className="flex items-end justify-between text-center lg:text-left">
           <div className="w-full lg:w-auto">
@@ -282,23 +277,10 @@ export default function HomePage() {
            </a>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-4 lg:gap-5 mt-10 lg:mt-12">
-          {reels.map((reel, idx) => (
-            <a key={idx} href={INSTAGRAM_LINK} target="_blank" rel="noopener noreferrer" className="group relative overflow-hidden rounded-xl border border-[#d4af37]/20 bg-gradient-to-b from-[#1a1a1a] to-[#0a0a0a] aspect-[9/16] flex flex-col cursor-pointer block">
-              <div className="relative z-10 p-3 sm:p-4 text-center mt-2 sm:mt-4">
-                 <p className="text-[9px] sm:text-[10px] font-bold tracking-wider text-white uppercase bg-black/40 inline-block px-2 py-1 rounded">{reel.topText}</p>
-                 <p className={`text-base sm:text-lg font-black uppercase mt-1 ${reel.highlight}`}>{reel.bottomText}</p>
-              </div>
-              <div className="absolute inset-0 z-10 flex items-center justify-center opacity-80 group-hover:opacity-100 transition-opacity">
-                 <div className="w-10 h-10 sm:w-12 sm:h-12 bg-black/60 rounded-full flex items-center justify-center border border-white/20 backdrop-blur-sm">
-                   <Play className="text-white w-4 h-4 sm:w-5 sm:h-5 ml-1" fill="currentColor"/>
-                 </div>
-              </div>
-              <div className="relative z-10 mt-auto p-3 sm:p-4 flex items-center gap-2 text-[10px] sm:text-xs font-semibold text-gray-300 bg-gradient-to-t from-black to-transparent pt-10">
-                <Play size={12} className="text-[#d4af37] sm:w-[14px] sm:h-[14px]"/> {reel.views}
-              </div>
-            </a>
-          ))}
+        {/* The behold widget renders the grid and handles the data automatically */}
+        <div className="mt-10 lg:mt-12 w-full min-h-[400px]">
+           {/* @ts-ignore */}
+           <behold-widget feed-id="NWYA2ifW7Nnd3R4q9GRl"></behold-widget>
         </div>
       </section>
 
